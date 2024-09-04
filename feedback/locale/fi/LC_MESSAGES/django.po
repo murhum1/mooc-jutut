@@ -92,9 +92,9 @@ msgstr "Käytä regex-hakua"
 #: feedback/filters.py
 msgid ""
 "Override default search method and use case-insensitive regex search instead."
-msgstr
-"Etsi tavallisen hakumenetelmän sijaan säännöllisellä lausekkeella "
-"(case-insensitive regex)."
+msgstr ""
+"Etsi tavallisen hakumenetelmän sijaan säännöllisellä lausekkeella (case-"
+"insensitive regex)."
 
 #: feedback/filters.py
 msgid "Teacher content"
@@ -245,9 +245,16 @@ msgid "Response notify"
 msgstr "Ilmoitus vastauksesta"
 
 #: feedback/models.py
-#| msgid "Response time"
 msgid "Response seen"
 msgstr "Vastaus nähty"
+
+#: feedback/models.py
+msgid "Pin"
+msgstr "Kiinnitä"
+
+#: feedback/models.py
+msgid "Pin tag to the beginning of the list of tags."
+msgstr "Kiinnitä tägi luettelon alkuun."
 
 #: feedback/models.py feedback/templates/feedback_tags/contexttag_list.html
 msgid "Question key"
@@ -357,7 +364,6 @@ msgid "Import"
 msgstr "Tuo"
 
 #: feedback/templates/feedback_tags/import_tags.html
-#| msgid "Can be imported"
 msgid "Tags to be imported"
 msgstr "Tuotavat tägit"
 
@@ -389,7 +395,6 @@ msgid "no (tag with this slug already exists)"
 msgstr "ei (tunnisteella on jo tägi)"
 
 #: feedback/templates/feedback_tags/import_tags.html
-#| msgid "No feedback tags found for course %(courseName)s."
 msgid "No feedback tags found for this course."
 msgstr "Kurssille ei löytynyt palautetägejä."
 
@@ -405,6 +410,11 @@ msgstr ""
 #: feedback/templates/feedback_tags/tag_list.html
 msgid "List of feedback tags"
 msgstr "Luettelo palautetägeistä"
+
+#: feedback/templates/manage/_background.html
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Unable to fetch student's response."
+msgstr "Opiskelijan vastauksen hakeminen ei onnistunut."
 
 #: feedback/templates/manage/_conversations_as_list.html
 msgid "No feedback shown as there are errors in the filter form"
@@ -427,12 +437,16 @@ msgid "Show exercise in A+"
 msgstr "Näytä tehtävä A+:ssa"
 
 #: feedback/templates/manage/_exercise_heading.html
-msgid "Show all feedback for this execise"
+msgid "Show all feedback for this exercise"
 msgstr "Näytä kaikki palautteet tähän tehtävään"
 
 #: feedback/templates/manage/_exercise_heading.html
-msgid "Show feedback for this execise by the student"
-msgstr "Näytä tämän opiskelijan palautteet tähän tehtävään"
+msgid "Copy link to this conversation"
+msgstr "Kopioi linkki tähän keskusteluun"
+
+#: feedback/templates/manage/_exercise_heading.html
+msgid "The link was copied to the clipboard"
+msgstr "Linkki kopioitiin leikepöydälle"
 
 #: feedback/templates/manage/_feedback_message.html
 msgid "This field was <b>not</b> required"
@@ -455,6 +469,41 @@ msgstr "Näytä palautus A+:ssa"
 msgid "Filter options (%(number)s active)"
 msgstr "Rajausvalinnat (%(number)s aktiivista)"
 
+#: feedback/templates/manage/_points.html
+msgid "Total"
+msgstr "Kokonaispisteet"
+
+#: feedback/templates/manage/_points.html
+#, python-format
+msgid "Points in category '%(category_name)s'"
+msgstr "'%(category_name)s'-kategorian pisteet"
+
+#: feedback/templates/manage/_points.html
+msgid "Points from module"
+msgstr "Pisteet moduulista"
+
+#: feedback/templates/manage/_points.html
+#: feedback/templates/manage/_progress_bar.html
+msgid "Points to pass"
+msgstr "Läpäisyyn vaadittavat pisteet"
+
+#: feedback/templates/manage/_points.html
+msgid "The student has not passed the module."
+msgstr "Opiskelija ei ole läpäissyt moduulia."
+
+#: feedback/templates/manage/_points.html
+msgid "Points from chapter"
+msgstr "Pisteet luvusta"
+
+#: feedback/templates/manage/_points.html
+msgid "The student has not passed all of the exercises in the chapter."
+msgstr "Opiskelija ei ole läpäissyt kaikkia luvun tehtäviä."
+
+#: feedback/templates/manage/_progress_bar.html
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Points"
+msgstr "Pisteet"
+
 #: feedback/templates/manage/_response_message.html
 msgid "Update"
 msgstr "Päivitä"
@@ -464,8 +513,44 @@ msgid "Respond"
 msgstr "Vastaa"
 
 #: feedback/templates/manage/_response_message.html
-msgid "The student has seen this response."
-msgstr "Opiskelija on nähnyt tämän vastauksen."
+msgid "Toggle text preview"
+msgstr "Tekstin esikatselun vaihtaminen"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Preview"
+msgstr "Esikatsele"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Hide preview"
+msgstr "Piilota esikatselu"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Hide preview and return to editing"
+msgstr "Piilota esikatselu ja palaa muokkausnäkymään"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Show styling buttons"
+msgstr "Näytä muotoilupainikkeet"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Styling buttons"
+msgstr "Muotoilupainikkeet"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Insert link"
+msgstr "Lisää linkki"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Bold"
+msgstr "Lihavointi"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Italic"
+msgstr "Kursivointi"
+
+#: feedback/templates/manage/_response_message.html
+msgid "Monospace/code"
+msgstr "Tasalevyinen/koodi"
 
 #: feedback/templates/manage/_response_message.html
 msgid "Conflict"
@@ -483,29 +568,71 @@ msgstr "Palaute on automaattisesti hyväksytty"
 msgid "auto"
 msgstr "auto"
 
+#: feedback/templates/manage/_response_message.html
+msgid "The student has seen this response."
+msgstr "Opiskelija on nähnyt tämän vastauksen."
+
 #: feedback/templates/manage/_submitter_heading.html
 msgid "Open student page in A+"
 msgstr "Avaa opiskelijasivu A+:ssa"
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Toolbar of buttons related to student"
+msgstr "Kokoelma opiskelijaan liittyviä painikkeita"
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Group of buttons for viewing conversations with student"
+msgstr ""
+"Ryhmä painikkeita, joiden avulla voi tarkastella keskusteluita opiskelijan "
+"kanssa"
 
 #: feedback/templates/manage/_submitter_heading.html
 msgid "Show all feedback for this student"
 msgstr "Näytä kaikki palautteet tältä opiskelijalta"
 
 #: feedback/templates/manage/_submitter_heading.html
-msgid "Show the student's response to the background questionnaire"
-msgstr "Näytä opiskelijan vastaus taustatietokyselyyn"
+#, python-format
+msgid "Conversations with %(name)s"
+msgstr "Keskustelut opiskelijan %(name)s kanssa"
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Unable to preview conversations."
+msgstr "Keskustelujen esikatselu ei onnistu."
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Show conversations with student in a popover."
+msgstr "Näytä keskustelut opiskelijan kanssa popover-ikkunassa."
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Group of buttons providing background context"
+msgstr "Ryhmä painikkeita, jotka tarjoavat taustakontekstia"
+
+#: feedback/templates/manage/_submitter_heading.html
+#, python-format
+msgid "Background questionnaire for %(name)s"
+msgstr "Opiskelijan %(name)s vastaus taustatietokyselyyn"
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid ""
+"Show the student's response to the background questionnaire in a popover."
+msgstr "Näytä opiskelijan vastaus taustatietokyselyyn popover-ikkunassa."
 
 #: feedback/templates/manage/_submitter_heading.html
 msgid "Background"
 msgstr "Taustatieto"
 
 #: feedback/templates/manage/_submitter_heading.html
-msgid "Show the student's points"
-msgstr "Näytä opiskelijan pisteet"
+#, python-format
+msgid "Points for %(name)s"
+msgstr "Opiskelijan %(name)s pisteet"
 
 #: feedback/templates/manage/_submitter_heading.html
-msgid "Points"
-msgstr "Pisteet"
+msgid "Unable to fetch points."
+msgstr "Pisteiden hakeminen ei onnistunut."
+
+#: feedback/templates/manage/_submitter_heading.html
+msgid "Show the student's points in a popover."
+msgstr "Näytä opiskelijan pisteet popover-ikkunassa."
 
 #: feedback/templates/manage/_upload_status.html
 #, python-format
@@ -680,6 +807,18 @@ msgid "No feedback by any student yet."
 msgstr "Ei palautetta keneltäkään."
 
 #: feedback/templates_j2/feedback/_form.html
+msgid "teacher"
+msgstr "opettaja"
+
+#: feedback/templates_j2/feedback/_form.html
+msgid "Previous responses and teacher replies"
+msgstr "Aiemmat omat vastaukset ja opettajan vastaukset"
+
+#: feedback/templates_j2/feedback/_form.html
+msgid "Previous responses"
+msgstr "Aiemmat omat vastaukset"
+
+#: feedback/templates_j2/feedback/_form.html
 msgid "show more"
 msgstr "näytä lisää"
 
@@ -703,6 +842,42 @@ msgstr "Palaute"
 #, python-format
 msgid "Feedback <i>%(jutut)s</i> for <i>%(aplus)s</i>"
 msgstr "Palaute <i>%(jutut)s</i> palvelulle <i>%(aplus)s</i>"
+
+#: feedback/templatetags/feedback.py
+msgid "Give 0 points and send response"
+msgstr "Anna 0 pistettä ja lähetä vastaus"
+
+#: feedback/templatetags/feedback.py
+msgid "Give half points and send response"
+msgstr "Anna puolet pisteistä ja lähetä vastaus"
+
+#: feedback/templatetags/feedback.py
+msgid "Give full points and send response"
+msgstr "Anna täydet pisteet ja lähetä vastaus"
+
+#: feedback/templatetags/feedback.py
+msgid "Grade and send response"
+msgstr "Arvioi ja lähetä vastaus"
+
+#: feedback/views.py
+msgid "Missing A+ API token!"
+msgstr "A+ API-avain puuttuu!"
+
+#: feedback/views.py
+msgid ""
+"Some features will not fully work due to the missing A+ API token. Log in "
+"via A+ and access this site through the course menu."
+msgstr ""
+"Jotkin sivun toiminnot eivät toimi täysin puuttuvan A+ API-avaimen takia. "
+"Kirjaudu sisään A+-palvelussa ja tule tälle sivustolle kurssivalikon kautta."
+
+#: feedback/views.py
+msgid ""
+"Unable to fetch content due to missing A+ API token. Log in via A+ and "
+"access this site through the course menu."
+msgstr ""
+"Sisällön hakeminen ei onnistu puuttuvan A+ API-avaimen takia. Kirjaudu "
+"sisään A+-palvelussa ja tule tälle sivustolle kurssivalikon kautta."
 
 #: feedback/views.py
 msgid "Edit feedback tag"

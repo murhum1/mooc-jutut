@@ -79,6 +79,10 @@ input[type="checkbox"].combosearch + label {
 .fb-filter-field:has(> #id_feedbackfilter_flags) {
 	width: 100%;
 }
+#id_feedbackfilter_flags .segmented-select {
+	margin: 0.4em 0px;
+	display: flex;
+}
 
 /* Displaying errors */
 .feedback-filter:has(> .errorlist) {
@@ -218,88 +222,6 @@ input[type="checkbox"].combosearch + label {
 	content: "\e260";
 }
 
-/* segmented buttons */
-.btn-check {
-	position: absolute;
-	clip: rect(0,0,0,0);
-	pointer-events: none;
-}
-.btn-outline-secondary {
-	--bs-btn-color: #6c757d;
-	--bs-btn-border-color: #6c757d;
-	--bs-btn-hover-color: #fff;
-	--bs-btn-hover-bg: #6c757d;
-	--bs-btn-hover-border-color: #6c757d;
-	--bs-btn-focus-shadow-rgb: 108,117,125;
-	--bs-btn-active-color: #fff;
-	--bs-btn-active-bg: #6c757d;
-	--bs-btn-active-border-color: #6c757d;
-	--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-	--bs-btn-disabled-color: #6c757d;
-	--bs-btn-disabled-bg: transparent;
-	--bs-btn-disabled-border-color: #6c757d;
-	--bs-gradient: none;
-}
-.btn-outline-secondary {
-	color: var(--bs-btn-color);
-	border-color: var(--bs-btn-border-color);
-}
-.btn-outline-secondary:hover {
-	color: var(--bs-btn-hover-color);
-	background-color: var(--bs-btn-hover-bg);
-	border-color: var(--bs-btn-hover-border-color);
-}
-.segmented-select > .btn {
-	position: relative;
-	flex: 1 1 auto;
-	border-radius: 0.7em;
-	margin-right: 0;
-}
-.segmented-select.sm > .btn {
-	padding: .25rem .5rem;
-	font-size: .875em;
-}
-.btn-check:checked + .btn, :not(.btn-check) + .btn:active {
-	color: var(--bs-btn-active-color);
-	background-color: var(--bs-btn-active-bg);
-	border-color: var(--bs-btn-active-border-color);
-}
-.segmented-select > .btn-check:checked + .btn, .segmented-select > .btn-check:focus + .btn, .segmented-select > .btn:focus, .segmented-select > .btn:hover {
-	z-index: 1;
-}
-.segmented-select > .segmented-select:not(:last-child) > .btn, .segmented-select > .btn.dropdown-toggle-split:first-child, .segmented-select > .btn:not(:last-child):not(.dropdown-toggle) {
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-}
-.segmented-select > .segmented-select:not(:first-child) > .btn, .segmented-select > .btn:nth-child(n+3), .segmented-select > :not(.btn-check) + .btn {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
-.segmented-select > .segmented-select:not(:first-child), .segmented-select > :not(.btn-check:first-child) + .btn {
-	margin-left: -1px;
-}
-.segmented-select {
-	margin: 0.4em 0px;
-	display: flex;
-}
-.segmented-select.sm > .btn {
-	line-height: 1.2;
-}
-
-.btn-check:checked + .btn:before {
-	position: relative;
-	top: 1px;
-	display: inline-block;
-	font-family: 'Glyphicons Halflings';
-	font-style: normal;
-	font-weight: 400;
-	line-height: 0.7;
-	margin-right: 0.2em;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	content: "\e013";
-}
-
 /* labels in panel headers and footers */
 .panel-heading .label,
 .panel-footer .label {
@@ -322,15 +244,25 @@ input[type="checkbox"].combosearch + label {
 
 .hover-btn {
 	background: none;
-	border-color: rgba(150, 150, 150, 0.2);
+	border-color: rgba(150, 150, 150, 0.3);
 }
-.hover-btn > .glyphicon {
-	top: 0.2em
+.hover-btn > .glyphicon,
+.styling-btn-container .btn > .glyphicon {
+	top: 03px
 }
 .hover-btn:hover {
 	background-color: rgba(150, 150, 150, 0.3);
 }
 
+
+/* Btn-group styling fix so tooltips and popovers don't break styling. */
+.btn-group > .btn ~ .btn {
+	margin-left: -1px;
+}
+.feedback-response-panel .btn-group > .btn.btn-xs:not(:has( ~ .btn)) {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
 
 /* feedback/response panel */
 .feedback-response-panel {
@@ -341,10 +273,21 @@ input[type="checkbox"].combosearch + label {
 }
 
 .feedback-response-panel > .panel-heading {
+	display: flex;
+	justify-content: space-between;
 	padding: 0.4em 0.6em;
 	background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
 	background-color: #222;
 	border-color: #080808;
+}
+.feedback-response-panel .student-info {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.feedback-response-panel .student-info > * {
+	flex-shrink: 0;
+	margin-right: 8px;
 }
 .feedback-response-panel > .panel-heading a.student-name {
 	font-weight: bold;
@@ -354,11 +297,20 @@ input[type="checkbox"].combosearch + label {
 .feedback-response-panel > .panel-heading a.student-name:hover {
 	color: #ddf;
 }
+.feedback-response-panel .student-info > .student-tags > .label.colortag {
+	margin-right: 5px;
+}
 .feedback-response-panel > .panel-heading .hover-btn {
 	color: #fff;
 }
-.feedback-response-panel > .panel-heading .label {
-	font-size: 70%;
+.feedback-response-panel > .panel-heading .student-tags .label {
+	font-size: 75%;
+}
+.feedback-response-panel > .panel-heading > .btn-toolbar {
+	display: flex;
+	align-items: start;
+	justify-content: flex-end;
+	flex-shrink: 0;
 }
 
 .feedback-response-panel > .panel-body {
@@ -367,7 +319,7 @@ input[type="checkbox"].combosearch + label {
 	flex-wrap: wrap;
 }
 .feedback-response-panel > .panel-body > .conversation-panel {
-	flex: 35%;
+	flex: 37%;
 	max-width: 75%;
 	padding: 0.5em;
 }
@@ -533,23 +485,207 @@ body.ios .feedback-message tr .glyphicon {
 	min-height: 50px;
 	resize: both;
 }
+.response-message span.textarea.preview {
+	margin: 5px;
+}
 .response-message .respond-btn-container {
 	float: right;
 	margin: 0.2em;
+}
+/* Btn-group styling fix so tooltips don't break styling. */
+.response-message .btn-group .btn ~ .btn {
+	margin-left: -1px;
+}
+.response-message .btn-group > .btn ~ .dropdown-toggle {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+.response-message .respond-btn-container .dropdown-menu {
+	min-width: auto;
+	padding: 0;
+	margin-top: 0;
+}
+.response-message .respond-btn-container .dropdown-menu .btn {
+	width: 100%;
 }
 .response-message .ok-icon {
 	font-size: 0.8em;
 }
 .response-message .message-info {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: flex-end;
+	padding: 0 0.3em;
 }
-.response-msg-bottom {
+.styling-btn-container .btn-toolbar {
 	padding: 0.3em;
+	padding-left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.response-msg-bottom-right {
 	display: flex;
 	align-items: flex-end;
+	justify-content: flex-end;
 }
+.response-label-container > * {
+	margin: 0.3em 0;
+}
+.status-tag-container > *,
+.upload-status {
+	margin: 0 0.3em;
+}
+
+/* Popover for styling buttons when they don't fit normally */
+.visible-xs-response {
+	display: none;
+}
+@media (max-width: 499px),
+(min-width: 701px) and (max-width: 991px) {
+	.visible-xs-response {
+		display: block;
+	}
+	.hidden-xs-response {
+		display: none;
+	}
+}
+.popover.style-buttons .popover-content{
+	padding: 4px;
+	display: flex;
+}
+.popover.style-buttons .btn-group.styling-buttons {
+	display: flex;
+}
+
+/* Popovers */
+.popover {
+	width: 45vw;
+	max-width: 600px;
+}
+@media (max-width: 700px) {
+	.popover {
+		width: 90vw;
+	}
+}
+
+.popover > .popover-content {
+	overflow-y: scroll;
+	max-height: 85vh;
+}
+
+/* conversation preview popovers */
+.popover .conversation-panel:not(:last-child) {
+	padding-bottom: 1rem;
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 1rem;
+}
+
+.popover .conversation-panel .panel-heading {
+	margin-bottom: -3px;
+}
+.popover.feedback-message {
+	padding-bottom: 0;
+}
+.popover .feedback-message td {
+	padding: 3px;
+}
+.popover .feedback-message > .panel-footer {
+	cursor: auto;
+}
+.popover .feedback-message > .panel-footer .timestamp:after {
+	display: none;
+}
+.popover .conversation-panel .display-response {
+	color: #000;
+}
+.popover .conversation-panel .message-info {
+	height: 0.5em;
+	line-height: 1;
+}
+
+/* background questionnaire popovers */
+.background-display h3 {
+	margin-top: 4px;
+	font-size: 20px;
+}
+.popover .background-display .control-label,
+.popover .background-display .question-description p {
+	margin-bottom: 2px;
+}
+.popover .background-display .form-group {
+	margin-bottom: 0.75em;
+}
+.popover .background-display .form-group:last-child {
+	margin-bottom: 0
+}
+.popover .background-display label > input[type="radio"]:checked + span,
+.popover .background-display label > input[type="checkbox"]:checked + span {
+	background-color: #bce8f1;
+	box-shadow: 0 0 0 3px #bce8f1;
+}
+
+/* points display popovers */
+.popover:has( .points-display) {
+	max-width: 400px;
+}
+
+.points-level-group:has( ~ .points-level-group) {
+	margin-bottom: 0.75em;
+}
+
+.points-display table.category-points-table {
+	width: 100%
+}
+.points-display th.category-label {
+	width: 1.5em;
+	padding-right: 0.4em;
+	font-weight: 500;
+	text-align: end;
+	text-wrap: nowrap;
+}
+
+
+/* Progress bar for points */
+.progress {
+	position: relative;
+	height: 1.3em;
+	margin-bottom: 0;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+.progress-bar {
+	float: left;
+	width: 0%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 22px;
+	color: #fff;
+	text-align: center;
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+}
+.progress-striped .progress-bar, .progress-bar-striped {
+	background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-size: 40px 40px;
+}
+.progress .points-text {
+	position: absolute;
+	left: 6px;
+}
+.progress .required-points {
+	position: absolute;
+	height: 20px;
+	border-left: 1px solid #000;
+}
+
+
+/* Import context tags */
 
 .import-form {
 	margin-bottom: 0.5em;
